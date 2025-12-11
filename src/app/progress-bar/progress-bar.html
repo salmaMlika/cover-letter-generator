@@ -1,0 +1,10 @@
+<div class="w-full bg-gray-200 rounded h-3">
+  <div
+    class="bg-blue-600 h-3 rounded transition-all"
+    [style.width.%]="progressPercentage">
+  </div>
+</div>
+
+<p style="text-align:center; margin-top:8px;">
+  Étape {{ config.currentStep }} / {{ config.totalSteps }}
+</p>

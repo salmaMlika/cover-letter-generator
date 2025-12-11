@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithPopup, GoogleAuthProvider, User } from 'firebase/auth';
-import { environment, firebaseConfig } from '../../environements/environement'; // ✅ import du config Firebase
+import { firebaseConfig } from '../../environements/environement'; 
 
-// Initialise Firebase une seule fois avec la config depuis environment
 const app = initializeApp(firebaseConfig);
 
 @Injectable({ providedIn: 'root' })

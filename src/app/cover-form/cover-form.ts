@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { LlmService } from '../services/llm.service';
 import { AuthService } from '../services/auth.service';
 import { User } from 'firebase/auth';
+import {  ProgressBar } from '../progress-bar/progress-bar';
 
 @Component({
   selector: 'app-cover-form',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, ProgressBar],
   templateUrl: './cover-form.html',
 })
 export class CoverForm {
@@ -17,10 +18,14 @@ export class CoverForm {
   companyName = '';
   jobDescription = '';
   currentStep = 1;
+  progressConfig = {
+  currentStep: 1,
+  totalSteps: 3
+  };
+
   loading = false;
   generatedLetter = '';
   selectedTone = 'professional';
-
   isEditing = false;
   originalLetter = '';
   user: User | null = null;
@@ -47,8 +52,7 @@ export class CoverForm {
     this.generatedLetter = '';
     this.isEditing = false;
 
-    
-    
+
     const userName = this.user?.displayName || '[Your Name]';
     const userEmail = this.user?.email || '[Your Email]';
 
@@ -105,13 +109,18 @@ INSTRUCTIONS:
     return letter.trim();
   }
 
-  continue() {
-    if (this.currentStep < 3) this.currentStep++;
+   continue() {
+    if (this.currentStep < 3) {
+      this.currentStep++;
+      this.progressConfig.currentStep = this.currentStep;
+    }
   }
 
   goBack() {
-    if (this.currentStep > 1) this.currentStep--;
-  }
+    if (this.currentStep > 1) {
+      this.currentStep--;
+      this.progressConfig.currentStep = this.currentStep;
+    }}
 
   toggleEdit() { this.isEditing = true; this.originalLetter = this.generatedLetter; }
   saveEdit() { this.isEditing = false; alert('✅ Changes saved successfully!'); }

@@ -14,7 +14,6 @@ export class HeroPage {
   user: User | null = null;
 
   constructor(public authService: AuthService) {
-    // S’abonner à user$ pour savoir si quelqu’un est connecté
     this.authService.user$.subscribe(u => this.user = u);
   }
 }

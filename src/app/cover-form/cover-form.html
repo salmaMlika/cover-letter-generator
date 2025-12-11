@@ -37,13 +37,7 @@
         </div>
 
         <!-- Progress Bar -->
-        <div class="mb-8">
-          <div class="text-sm text-gray-600 font-medium mb-2">Step {{ currentStep }}</div>
-          <div class="w-full h-1 bg-gray-200 rounded-full">
-            <div class="h-full bg-blue-500 rounded-full transition-all duration-300" 
-                 [style.width.%]="currentStep * 33.33"></div>
-          </div>
-        </div>
+<app-progress-bar [config]="progressConfig"></app-progress-bar>
 
         <!-- STEP 1: Add Resume -->
         <div *ngIf="currentStep === 1">
